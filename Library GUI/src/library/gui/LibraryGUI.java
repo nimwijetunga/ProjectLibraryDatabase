@@ -32,6 +32,7 @@ import library.main.LibrarySystem;
 
 
 @SuppressWarnings("serial")
+//added validation
 public class LibraryGUI extends JFrame{
 	static Locale locale = new Locale("en", "CA");      
     static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);

@@ -27,7 +27,8 @@ public class ButtonResponse implements ActionListener{
 	JTextField username = new JTextField();
 	
 	JPasswordField password = new JPasswordField();
-
+	
+	//added validation
 	public void actionPerformed(ActionEvent e) {
 				String temp = " ";
 			    if (e.getActionCommand().equals("Add User")) {
