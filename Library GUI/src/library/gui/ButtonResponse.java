@@ -1,6 +1,7 @@
 package library.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -476,6 +477,11 @@ public class ButtonResponse implements ActionListener{
 
 		controls.add(password);
 		panel.add(controls, BorderLayout.CENTER);
+		
+		if(LibraryGUI.attempts >= 1){
+			username.setBackground(new Color(240,50,50));
+			password.setBackground(new Color(240,50,50));
+		}
 
 		JOptionPane.showMessageDialog(frame, panel, "Login, Attempt: " + LibraryGUI.attempts + "/5", JOptionPane.QUESTION_MESSAGE);
 
@@ -485,10 +491,7 @@ public class ButtonResponse implements ActionListener{
 	}
 
 	public boolean inputCorrect(String user, char [] pass){
-		String passString = "";
-		for(int i = 0; i < pass.length; i++){
-			passString += pass[i];
-		}
+		String passString = new String(pass);
 		if(!user.equals("admin") || !passString.equals("admin")){
 			return false;
 		}
@@ -498,7 +501,7 @@ public class ButtonResponse implements ActionListener{
 	public void login(){
 		login(LibraryGUI.frame);
 		if(!(inputCorrect(username.getText(), password.getPassword()))){
-			JOptionPane.showMessageDialog(null, "Username/Password is Incorrect");
+			//JOptionPane.showMessageDialog(null, "Username/Password is Incorrect");
 			LibraryGUI.attempts++;
 		}
 		else
