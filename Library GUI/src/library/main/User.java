@@ -80,7 +80,9 @@ public class User{
 		this.finesBalance = finesBalance;
 	}
 	
-	//constructor for the uer class
+	/*constructor for the user class
+	 * @param num = student number, first = first name, last = last name
+	 */
 	public User(int num, String first, String last){
 		studentNumber = num;
 		firstName = first;
