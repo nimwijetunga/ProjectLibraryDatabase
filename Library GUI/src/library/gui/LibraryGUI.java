@@ -114,6 +114,7 @@ public class LibraryGUI extends JFrame{
 		String [] author = {"Maryam Terry", "Hilario Sigman", "Casimira Danna", "Raul Burchfield", "Rodney Clift"};
 		String [] title =  {"Gulliver's Travels", "Tom Jones", " The Black Sheep", "Nightmare Abbey", " Wuthering Heights"};
 		String [] category = {"Action", "Adventure", "Action", "Drama", "Adventure"};
+		
 		int pRate = 0;
 		double cost = 12.34;
 

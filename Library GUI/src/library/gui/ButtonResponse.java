@@ -29,7 +29,6 @@ public class ButtonResponse implements ActionListener{
 
 	JPasswordField password = new JPasswordField();
 
-	//test commit
 	public void actionPerformed(ActionEvent e) {
 		String temp = " ";
 		if (e.getActionCommand().equals("Add User")) {
@@ -248,18 +247,18 @@ public class ButtonResponse implements ActionListener{
 				JOptionPane.showMessageDialog(null, "User Does Not Have The Book");
 				return;
 			}
-			boolean c = false;
+			
+			if(!LibraryGUI.sys.userExists(stuNum)){
+				JOptionPane.showMessageDialog(null, "Invalid Student Number");
+				return;
+			}
+			
 			for(int i = 0; i < LibraryGUI.sys.user.size(); i++){
 				if(LibraryGUI.sys.user.get(i).getStudentNumber() == stuNum){
 					LibraryGUI.sys.returnBook(iden, stuNum, dateR);
 					JOptionPane.showMessageDialog(null, "Book Returned");
-					c = true;
 					return;
 				}
-			}
-			if(!c){
-				JOptionPane.showMessageDialog(null, "Invalid Student Number");
-				return;
 			}
 		}
 

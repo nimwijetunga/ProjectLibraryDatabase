@@ -25,7 +25,9 @@ public class User{
 	}
 
 	public ArrayList<String> userISBN = new ArrayList<String>();
-
+	public ArrayList<String> checkOutDate = new ArrayList<String>();
+	public ArrayList<String> userISBNKeep = new ArrayList<String>();
+	
 	public int getStudentNumber() {
 		return studentNumber;
 	}
