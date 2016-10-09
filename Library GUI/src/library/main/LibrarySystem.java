@@ -400,8 +400,7 @@ public class LibrarySystem{
 			for(int i = 0; i < user.size(); i++){
 				if(user.get(i).getStudentNumber() == stuNum){
 					int temp = (totalReturn - totalCheckOut) - 14;
-					user.get(i).setDaysOverdue(temp);
-					user.get(i).addFines();
+					user.get(i).addFines(temp);
 				}
 			}
 		}
