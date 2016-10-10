@@ -34,19 +34,22 @@ import library.main.LibrarySystem;
 @SuppressWarnings("serial")
 
 public class LibraryGUI extends JFrame{
+	
+	//To be able to format double values into currency (used in the ButtonResponse Class)
 	static Locale locale = new Locale("en", "CA");      
 	static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
 
 	private JPanel contentPane;
-
-	private static double fine;
 	
+	//variables used in the ButtonResponse class
+	private static double fine;
 	public static int attempts = 0;
-
 	public static boolean credVerified = false;
 
+	//Creating an instance of the LibrarySystem class
 	public static LibrarySystem sys = new LibrarySystem("Stephen Lewis Secondary School");
-
+	
+	//To add values to the JList's on the GUI 
 	public static DefaultListModel <String> studentList = new DefaultListModel<String>();
 	public static DefaultListModel <String> titleList = new  DefaultListModel<String>();
 	public static DefaultListModel <String> bookList = new DefaultListModel<String>();
@@ -54,12 +57,18 @@ public class LibraryGUI extends JFrame{
 	public static DefaultListModel <String> userBookList = new DefaultListModel<String>();
 	public static DefaultListModel <String> bestBooks = new DefaultListModel<String>();
 
+	//Group all the radio buttons together
 	public static ButtonGroup group = new ButtonGroup();
 
+	//Creating a JFrame
 	public static LibraryGUI frame = new LibraryGUI();
 	
+	//Creating an instance of the ButtonResponse class
 	private ButtonResponse btn = new ButtonResponse();
-
+	
+	/*creating text fields for user inputs
+	 * Value of these text fields are read in the ButtonResponse Class and therefore needs to be static
+	 */
 	public static JTextField textField;
 	public static JTextField textField_1;
 	public static JTextField textField_2;
@@ -84,22 +93,21 @@ public class LibraryGUI extends JFrame{
 	public static JTextField textField_24;
 	public static JTextField textField_25;
 
-	/**
+	/**Main Method
 	 * Launch the application.
 	 */
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//LibraryGUI frame = new LibraryGUI();
-					frame.setVisible(true);
-					frame.setResizable(false);
+					frame.setVisible(true);//Make the frame visible
+					frame.setResizable(false);//Restrict maximizing the frame 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		//Creating fake users in the system to be used for testing purposes
 		int a = 665800;
 		String [] first = {"Blair", "Larry", "Elwood", "David", "Antonia", "Arminda", "Fonda", "Danille"};
 		String [] last = {"Greeno", " Corle", " Sartori", "Marcelino", "Sweetman", "Sacco", "Mccann", "Owens"};
@@ -109,7 +117,8 @@ public class LibraryGUI extends JFrame{
 			studentList.addElement(first[i] + " " + last[i] + ", " + a
 					+ ", " + formatter.format(fine));
 		}
-
+		
+		//Creating fake books for the system to be used for testing purposes
 		String isbn = "1234";
 		String [] author = {"Maryam Terry", "Hilario Sigman", "Casimira Danna", "Raul Burchfield", "Rodney Clift"};
 		String [] title =  {"Gulliver's Travels", "Tom Jones", " The Black Sheep", "Nightmare Abbey", " Wuthering Heights"};
@@ -129,11 +138,11 @@ public class LibraryGUI extends JFrame{
 		}
 	}
 
-	/**
-	 * Create the frame.
+	/*Constructor for the LibraryGUI class
+	 *Creates objects displayed on the frame
 	 */
 	public LibraryGUI() {
-
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		setBounds(100, 100, 1000, 400);
 		contentPane = new JPanel();
@@ -141,7 +150,17 @@ public class LibraryGUI extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setTitle(sys.getSystemName() + " Library System");
-
+		
+		 /*All J Objects Used:
+		 * The JTabbedPane object allows use to create multiple tabs in one frame
+		 * Each JPanel corresponds to a tab in the frame (i.e user, book, etc...)
+		 * Each JLabel corresponds to text displayed on the screen for ease of navigation and understanding
+		 * Each JTextField corresponds to a location where the user can enter text which is interpreted in the ButtonResponse class
+		 * Each JButton refers to a button when clicked initiates action in the ButtonResponse class
+		 * Each JList object allows for the displaying of a list of objects (i.e a list of users, books, books available, etc...)
+		 * Each JRadioButton refers to one of the ratings that the admin can enter for a created book(1,2,3,4,5)
+		 */
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 11, 950, 339);
 		contentPane.add(tabbedPane);
