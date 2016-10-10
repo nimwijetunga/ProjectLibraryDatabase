@@ -202,22 +202,11 @@ public class ButtonResponse implements ActionListener{
 				if(LibraryGUI.sys.user.get(i).getStudentNumber() == stuNum){
 					LibraryGUI.sys.checkOutBook(iden, stuNum, dateC);
 					JOptionPane.showMessageDialog(null, "Book Checked Out");
-					return;
+					break;
 				}
 			}
-		}
-
-		if(e.getActionCommand().equals("Refresh List")){
-			LibraryGUI.booksAvailable.removeAllElements();
-			temp = " ";
-			for(int i = 0; i < LibraryGUI.sys.book.size(); i++){
-				temp = String.valueOf(LibraryGUI.sys.book.get(i).getCheckedOut());
-				if(temp.equals("true"))
-					temp = "Checked Out";
-				else
-					temp = "Not Checked Out";
-				LibraryGUI.booksAvailable.addElement(LibraryGUI.sys.book.get(i).getISBN() + ", " + temp);
-			}
+			
+			refreshListCheckout();
 		}
 
 		if(e.getActionCommand().equals("Return Book")){
@@ -243,7 +232,7 @@ public class ButtonResponse implements ActionListener{
 					}
 				}
 			}
-			if(LibraryGUI.sys.userHasBook(stuNum, iden) == false){
+			if(!(LibraryGUI.sys.userHasBook(stuNum, iden))){
 				JOptionPane.showMessageDialog(null, "User Does Not Have The Book");
 				return;
 			}
@@ -257,9 +246,12 @@ public class ButtonResponse implements ActionListener{
 				if(LibraryGUI.sys.user.get(i).getStudentNumber() == stuNum){
 					LibraryGUI.sys.returnBook(iden, stuNum, dateR);
 					JOptionPane.showMessageDialog(null, "Book Returned");
-					return;
+					break;
 				}
 			}
+			
+			refreshListCheckout();
+			refreshUserList();
 		}
 
 		if(e.getActionCommand().equals("Lost Book")){
@@ -280,16 +272,10 @@ public class ButtonResponse implements ActionListener{
 
 			LibraryGUI.sys.bookLost(stuNum, iden);
 			JOptionPane.showMessageDialog(null, "Fine Added");
-		}
-
-		if(e.getActionCommand().equals("Refresh Students")){
-			double tempD = 0.0;
-			LibraryGUI.studentList.removeAllElements();
-			for(int i = 0; i < LibraryGUI.sys.user.size(); i++){
-				tempD = LibraryGUI.sys.user.get(i).getFinesBalance();
-				LibraryGUI.studentList.addElement(LibraryGUI.sys.user.get(i).getFirstName() + " " + LibraryGUI.sys.user.get(i).getLastName() +
-						", " + LibraryGUI.sys.user.get(i).getStudentNumber() + ", " + LibraryGUI.formatter.format(tempD));
-			}
+			
+			refreshListCheckout();
+			refreshUserList();
+			refreshBookList();
 		}
 
 		if(e.getActionCommand().equals("Search By Author")){
@@ -335,17 +321,6 @@ public class ButtonResponse implements ActionListener{
 			ArrayList<String> lst = LibraryGUI.sys.booksByCategory(LibraryGUI.textField_19.getText());
 			for(int i = 0; i < lst.size(); i++){
 				LibraryGUI.titleList.addElement(lst.get(i));
-			}
-		}
-
-		if(e.getActionCommand().equals("Refresh Book List")){
-			LibraryGUI.bookList.removeAllElements();
-			double a = 0;
-			for(int i = 0; i < LibraryGUI.sys.book.size(); i++){
-				a =  LibraryGUI.sys.book.get(i).getCost();
-				LibraryGUI.bookList.addElement(LibraryGUI.sys.book.get(i).getTitle() + ", " + LibraryGUI.sys.book.get(i).getAuthor()
-						+ ", " + LibraryGUI.sys.book.get(i).getISBN() + ", " + LibraryGUI.sys.book.get(i).getCategory()
-						+ ", " + LibraryGUI.sys.book.get(i).getBookRating() + ", " + LibraryGUI.formatter.format(a));
 			}
 		}
 
@@ -505,6 +480,40 @@ public class ButtonResponse implements ActionListener{
 		}
 		else
 			LibraryGUI.credVerified = true;
+	}
+	
+	public void refreshListCheckout(){
+		LibraryGUI.booksAvailable.removeAllElements();
+		String temp = " ";
+		for(int i = 0; i < LibraryGUI.sys.book.size(); i++){
+			temp = String.valueOf(LibraryGUI.sys.book.get(i).getCheckedOut());
+			if(temp.equals("true"))
+				temp = "Checked Out";
+			else
+				temp = "Not Checked Out";
+			LibraryGUI.booksAvailable.addElement(LibraryGUI.sys.book.get(i).getISBN() + ", " + temp);
+		}
+	}
+	
+	public void refreshUserList(){
+		double tempD = 0.0;
+		LibraryGUI.studentList.removeAllElements();
+		for(int i = 0; i < LibraryGUI.sys.user.size(); i++){
+			tempD = LibraryGUI.sys.user.get(i).getFinesBalance();
+			LibraryGUI.studentList.addElement(LibraryGUI.sys.user.get(i).getFirstName() + " " + LibraryGUI.sys.user.get(i).getLastName() +
+					", " + LibraryGUI.sys.user.get(i).getStudentNumber() + ", " + LibraryGUI.formatter.format(tempD));
+		}
+	}
+	
+	public void refreshBookList(){
+		LibraryGUI.bookList.removeAllElements();
+		double a = 0;
+		for(int i = 0; i < LibraryGUI.sys.book.size(); i++){
+			a =  LibraryGUI.sys.book.get(i).getCost();
+			LibraryGUI.bookList.addElement(LibraryGUI.sys.book.get(i).getTitle() + ", " + LibraryGUI.sys.book.get(i).getAuthor()
+					+ ", " + LibraryGUI.sys.book.get(i).getISBN() + ", " + LibraryGUI.sys.book.get(i).getCategory()
+					+ ", " + LibraryGUI.sys.book.get(i).getBookRating() + ", " + LibraryGUI.formatter.format(a));
+		}
 	}
 }
 

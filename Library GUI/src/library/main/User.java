@@ -18,11 +18,9 @@ public class User{
 		this.numOfBooks = numOfBooks;
 	}
 	
-	//userISBN, checkOutDate arry lists
-	//userISBNKeep array list which never gets elements removed from it
+	//userISBN, checkOutDate array lists
 	public ArrayList<String> userISBN = new ArrayList<String>();
 	public ArrayList<String> checkOutDate = new ArrayList<String>();
-	public ArrayList<String> userISBNKeep = new ArrayList<String>();
 	
 	//getter for student number
 	public int getStudentNumber() {

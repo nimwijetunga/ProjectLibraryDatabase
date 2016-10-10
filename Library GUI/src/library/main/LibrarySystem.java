@@ -133,7 +133,6 @@ public class LibrarySystem{
 				user.get(i).checkOutDate.add(date);
 				user.get(i).addBooksUserHas();
 				user.get(i).userISBN.add(iden);
-				user.get(i).userISBNKeep.add(iden);
 				break;
 			}
 		}
@@ -163,8 +162,8 @@ public class LibrarySystem{
 		//for loop to get the date which the book was checked out
 		for(int i = 0; i < user.size(); i++){
 			if(user.get(i).getStudentNumber() == stuNum){
-				for(int j = 0; j < user.get(i).userISBNKeep.size(); j++){
-					if(user.get(i).userISBNKeep.get(j).equals(iden)){
+				for(int j = 0; j < user.get(i).userISBN.size(); j++){
+					if(user.get(i).userISBN.get(j).equals(iden)){
 						dateC = user.get(i).checkOutDate.get(j);
 					}
 				}
@@ -174,11 +173,12 @@ public class LibrarySystem{
 		//charges fines if any
 		chargeFine(dateC,returnDate, stuNum, iden);
 		
-		//removes the book that the user had
+		
 		for(int i = 0; i < user.size(); i++){
 			if(user.get(i).getStudentNumber() == stuNum){
-				user.get(i).removeBooksUserHas();
-				user.get(i).userISBN.remove(iden);
+				user.get(i).removeBooksUserHas(); //removes the book that the user had
+				user.get(i).userISBN.remove(iden);//removes the isbn from the user class
+				user.get(i).checkOutDate.remove(dateC);//removes the checkout date from the user class
 			}
 		}
 		
@@ -256,7 +256,7 @@ public class LibrarySystem{
 	public boolean userHasBook (int stuNum, String iden){
 		for(int i = 0; i < user.size(); i++){
 			if(user.get(i).getStudentNumber() == stuNum){
-				for(int j = 0; j < user.get(i).userISBN.size(); i++){
+				for(int j = 0; j < user.get(i).userISBN.size(); j++){
 					if(user.get(i).userISBN.get(j).equalsIgnoreCase(iden)){
 						return true;
 					}

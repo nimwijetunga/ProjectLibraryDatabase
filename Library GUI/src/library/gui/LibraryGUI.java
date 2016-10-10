@@ -455,13 +455,8 @@ public class LibraryGUI extends JFrame{
 		textField_14.setBounds(153, 131, 86, 20);
 		panel_7.add(textField_14);
 
-		JButton btnRefreshList = new JButton("Refresh List");
-		btnRefreshList.addActionListener(btn);
-		btnRefreshList.setBounds(611, 11, 113, 23);
-		panel_7.add(btnRefreshList);
-
 		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(608, 45, 315, 252);
+		panel_8.setBounds(608, 21, 315, 276);
 		panel_7.add(panel_8);
 		panel_8.setLayout(null);
 
