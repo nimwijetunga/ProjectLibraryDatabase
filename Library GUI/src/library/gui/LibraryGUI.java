@@ -152,10 +152,20 @@ public class LibraryGUI extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		LibraryGUI.setUIFont(new FontUIResource(font));
+		setUIFont(new FontUIResource(font));
 		
 		setTitle(sys.getSystemName() + " Library System");
 		contentPane.setLayout(null);
+		
+		 /*All J Objects Used:
+	      * The JTabbedPane object allows use to create multiple tabs in one frame
+		  * Each JPanel corresponds to a tab in the frame (i.e user, book, etc...)
+		  * Each JLabel corresponds to text displayed on the screen for ease of navigation and understanding
+		  * Each JTextField corresponds to a location where the user can enter text which is interpreted in the ButtonResponse class
+		  * Each JButton refers to a button when clicked initiates action in the ButtonResponse class
+		  * Each JList object allows for the displaying of a list of objects (i.e a list of users, books, books available, etc...)
+		  * Each JRadioButton refers to one of the ratings that the admin can enter for a created book(1,2,3,4,5)
+		  */
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 11, 950, 339);
