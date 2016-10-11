@@ -55,6 +55,7 @@ public class LibraryGUI extends JFrame{
 	public static DefaultListModel <String> booksAvailable = new DefaultListModel<String>();
 	public static DefaultListModel <String> userBookList = new DefaultListModel<String>();
 	public static DefaultListModel <String> bestBooks = new DefaultListModel<String>();
+	public static DefaultListModel <String> searchedUser = new DefaultListModel<String>();
 
 	//Group all the radio buttons together
 	public static ButtonGroup group = new ButtonGroup();
@@ -94,6 +95,9 @@ public class LibraryGUI extends JFrame{
 	public static JTextField textField_23;
 	public static JTextField textField_24;
 	public static JTextField textField_25;
+	public static JTextField textField_3;
+	public static JTextField textField_8;
+	public static JTextField textField_20;
 
 	/**Main Method
 	 * Launch the application.
@@ -124,7 +128,7 @@ public class LibraryGUI extends JFrame{
 		//Creating fake books for the system to be used for testing purposes
 		String isbn = "1234";
 		String [] author = {"Maryam Terry", "Hilario Sigman", "Casimira Danna", "Raul Burchfield", "Rodney Clift"};
-		String [] title =  {"Gulliver's Travels", "Tom Jones", " The Black Sheep", "Nightmare Abbey", " Wuthering Heights"};
+		String [] title =  {"Gulliver's Travels", "Tom Jones", "The Black Sheep", "Nightmare Abbey", "Wuthering Heights"};
 		String [] category = {"Action", "Adventure", "Action", "Drama", "Adventure"};
 		
 		int pRate = 0;
@@ -165,7 +169,7 @@ public class LibraryGUI extends JFrame{
 		  * Each JButton refers to a button when clicked initiates action in the ButtonResponse class
 		  * Each JList object allows for the displaying of a list of objects (i.e a list of users, books, books available, etc...)
 		  * Each JRadioButton refers to one of the ratings that the admin can enter for a created book(1,2,3,4,5)
-		  */
+		 */
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 11, 950, 339);
@@ -213,7 +217,6 @@ public class LibraryGUI extends JFrame{
 		panel_1.add(btnAddUser);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Students", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_2.setBounds(257, 11, 371, 300);
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
@@ -495,7 +498,7 @@ public class LibraryGUI extends JFrame{
 
 		JList<String> list_3 = new JList<String>(titleList);
 		list_3.setBorder(new TitledBorder(null, "List of Books", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		list_3.setBounds(314, 11, 601, 269);
+		list_3.setBounds(499, 11, 416, 269);
 		panel_10.add(list_3);
 
 		JLabel label_13 = new JLabel("Search By Category");
@@ -520,6 +523,79 @@ public class LibraryGUI extends JFrame{
 		button_1.addActionListener(btn);
 		button_1.setBounds(16, 257, 148, 23);
 		panel_10.add(button_1);
+		
+		JLabel label_1 = new JLabel("Search By Name");
+		label_1.setBounds(291, 11, 148, 38);
+		panel_10.add(label_1);
+		
+		JLabel label_15 = new JLabel("Search Key");
+		label_15.setBounds(291, 60, 95, 24);
+		panel_10.add(label_15);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(401, 62, 86, 20);
+		panel_10.add(textField_3);
+		
+		JButton button_5 = new JButton("Search By Name");
+		button_5.addActionListener(btn);
+		button_5.setBounds(314, 109, 148, 24);
+		panel_10.add(button_5);
+		
+		JPanel panel_17 = new JPanel();
+		tabbedPane.addTab("Search Users", null, panel_17, null);
+		panel_17.setLayout(null);
+		
+		JPanel panel_18 = new JPanel();
+		panel_18.setBounds(12, 13, 334, 296);
+		panel_17.add(panel_18);
+		panel_18.setLayout(null);
+		
+		JLabel label_16 = new JLabel("Search By Student Number");
+		label_16.setBounds(12, 13, 185, 39);
+		panel_18.add(label_16);
+		
+		JLabel lblStudentNumber_2 = new JLabel("Student Number");
+		lblStudentNumber_2.setBounds(12, 65, 106, 25);
+		panel_18.add(lblStudentNumber_2);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(134, 65, 86, 20);
+		panel_18.add(textField_8);
+		
+		JButton btnSearchByNumber = new JButton("Search By Number");
+		btnSearchByNumber.addActionListener(btn);
+		btnSearchByNumber.setBounds(53, 105, 144, 25);
+		panel_18.add(btnSearchByNumber);
+		
+		JLabel label_22 = new JLabel("Search By Name");
+		label_22.setBounds(12, 143, 185, 39);
+		panel_18.add(label_22);
+		
+		JLabel label_23 = new JLabel("Student Name");
+		label_23.setBounds(12, 195, 106, 25);
+		panel_18.add(label_23);
+		
+		textField_20 = new JTextField();
+		textField_20.setColumns(10);
+		textField_20.setBounds(134, 196, 86, 20);
+		panel_18.add(textField_20);
+		
+		JButton button_6 = new JButton("Search By Student Name");
+		button_6.addActionListener(btn);
+		button_6.setBounds(22, 233, 185, 25);
+		panel_18.add(button_6);
+		
+		JPanel panel_19 = new JPanel();
+		panel_19.setBounds(356, 13, 577, 283);
+		panel_17.add(panel_19);
+		panel_19.setLayout(null);
+		
+		JList<String> list_6 = new JList<String>(searchedUser);
+		list_6.setBorder(new TitledBorder(null, "List of Users", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		list_6.setBounds(12, 13, 539, 257);
+		panel_19.add(list_6);
 
 		JPanel panel_11 = new JPanel();
 		tabbedPane.addTab("Books User Has", null, panel_11, null);

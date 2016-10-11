@@ -75,8 +75,6 @@ public class Book {
 		return bookRating;
 	}
 	
-	//Nim, Umar, Mohammed
-	
 	//setter for the book rating
 	public void setBookRating(int bookRating) {
 		this.bookRating = bookRating;

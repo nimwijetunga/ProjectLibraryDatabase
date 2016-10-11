@@ -1,6 +1,8 @@
 package library.main;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class LibrarySystem{
 	
@@ -10,6 +12,9 @@ public class LibrarySystem{
 	 */
 	public ArrayList<User> user = new ArrayList<User>();
 	public ArrayList<Book> book = new ArrayList<Book>();
+	
+	static Locale locale = new Locale("en", "CA");      
+	static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
 	
 	private String dateC = " ";
 	public int userCount = 0;
@@ -30,7 +35,7 @@ public class LibrarySystem{
 	}
 	
 	/*userExists to find if a user given his/her student number actually exists
-	 * @params stuNum is the student number of the user
+	 * @param stuNum is the student number of the user
 	 * @return returns true if the user exists false otherwise
 	 */
 	public boolean userExists(int stuNum){
@@ -40,6 +45,39 @@ public class LibrarySystem{
 			}
 		}
 		return false;
+	}
+	
+	/*searchUser finds a user given a student number
+	 * @param stuNum is the student number of the individual
+	 * @return returns a string with the students first and last name as well as their fine balance
+	 */
+	public String searchUser(int stuNum){
+		for(int i = 0; i < user.size(); i++){
+			if(user.get(i).getStudentNumber() == stuNum){
+				return user.get(i).getFirstName() + " " + user.get(i).getLastName() + ", " + formatter.format(user.get(i).getFinesBalance());
+			}
+		}
+		return "";
+	}
+	
+	/*searchUserName finds a list of user that contains (at least part) of the input string
+	 * @param name is the name that is being searched for 
+	 * @return returns an array list with the compiled list of students
+	 */
+	public ArrayList<String> searchUserName(String name){
+		ArrayList <String> names = new ArrayList<String>();
+		String temp = "";
+		for(int i = 0; i < user.size(); i++){
+			temp = user.get(i).getFirstName() + user.get(i).getLastName();
+			if(user.get(i).getFirstName().toLowerCase().indexOf(name.toLowerCase()) != -1){
+				names.add(user.get(i).getStudentNumber() + ", " + user.get(i).getFirstName() + " " + user.get(i).getLastName() + ", " + formatter.format(user.get(i).getFinesBalance()));
+			}else if(user.get(i).getLastName().toLowerCase().indexOf(name.toLowerCase()) != -1){
+				names.add(user.get(i).getStudentNumber() + ", " + user.get(i).getFirstName() + " " + user.get(i).getLastName() + ", " + formatter.format(user.get(i).getFinesBalance()));
+			}else if(temp.toLowerCase().indexOf(name.toLowerCase()) != -1){
+				names.add(user.get(i).getStudentNumber() + ", " + user.get(i).getFirstName() + " " + user.get(i).getLastName() + ", " + formatter.format(user.get(i).getFinesBalance()));
+			}
+		}
+		return names;
 	}
 	
 	/*createUser to create a new user given specific input criteria
@@ -85,8 +123,6 @@ public class LibrarySystem{
 	public void addBook(String name, String aut, String iden, String genre,int rate, double price){
 		book.add(new Book(name, aut, iden, genre, rate, price));
 	}
-	
-	//Nim, Umar, Mohammed
 	
 	/*removeBook to remove a specific book in the system
 	 * @params iden is the isbn of the book
@@ -221,6 +257,7 @@ public class LibrarySystem{
 		}
 	}
 	
+	
 	/*booksByAuthor finds all the books by one specific author
 	 * @param auth is the author being search for
 	 * @return returns an array list with all the book titles by that author
@@ -229,10 +266,25 @@ public class LibrarySystem{
 		ArrayList <String> booksAuthor = new ArrayList<String>();
 		for(int i = 0; i < book.size(); i++){
 			if(book.get(i).getAuthor().equalsIgnoreCase(auth)){
-				booksAuthor.add(book.get(i).getTitle());
+				booksAuthor.add(book.get(i).getTitle() + ", " + book.get(i).getISBN());
 			}
 		}
 		return booksAuthor;
+	}
+	
+	/*booksByTitle finds all the books that contains the string title in it
+	 * @param title is the tile (or part of the title) of a book the user wants to search for
+	 * @return returns an array list with all the matched book titles for the search
+	 */
+	public ArrayList<String> booksByTitle(String title){
+		title = title.toLowerCase();
+		ArrayList <String> bookTitle = new ArrayList<String>();
+		for(int i = 0; i < book.size(); i++){
+			if(book.get(i).getTitle().toLowerCase().indexOf(title.toLowerCase()) != -1){
+				bookTitle.add(book.get(i).getTitle() + ", " + book.get(i).getISBN());
+			}
+		}
+		return bookTitle;
 	}
 	
 	/*booksByCategory finds all the books in one specific category
@@ -243,7 +295,7 @@ public class LibrarySystem{
 		ArrayList<String> booksCategory = new ArrayList<String>();
 		for(int i = 0; i < book.size(); i++){
 			if(book.get(i).getCategory().equalsIgnoreCase(cat)){
-				booksCategory.add(book.get(i).getTitle());
+				booksCategory.add(book.get(i).getTitle() + ", " + book.get(i).getISBN());
 			}
 		}
 		return booksCategory;

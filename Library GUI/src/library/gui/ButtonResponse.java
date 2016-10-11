@@ -2,13 +2,14 @@ package library.gui;
 
 import java.awt.BorderLayout;
 
+
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Hashtable;
 
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
@@ -284,21 +285,12 @@ public class ButtonResponse implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Missing Fields");
 				return;
 			}
-			boolean x = false;
-			for(int i = 0; i < LibraryGUI.sys.book.size(); i++){
-				if(LibraryGUI.sys.book.get(i).getAuthor().equalsIgnoreCase(LibraryGUI.textField_18.getText())){
-					x = true;
-				}
-			}
-			if(x == false){
-				JOptionPane.showMessageDialog(null, "Could Not Find Author");
-				return;
-			}
 			LibraryGUI.titleList.removeAllElements();
 			ArrayList <String> list = LibraryGUI.sys.booksByAuthor(LibraryGUI.textField_18.getText());
 			for(int i = 0; i < list.size(); i++){
 				LibraryGUI.titleList.addElement(list.get(i));
 			}
+			JOptionPane.showMessageDialog(null, "Search Completed");
 		}
 
 		if(e.getActionCommand().equals("Search By Category")){
@@ -307,22 +299,12 @@ public class ButtonResponse implements ActionListener{
 				return;
 			}
 			LibraryGUI.titleList.removeAllElements();
-			boolean a = false;
-			for(int i = 0; i < LibraryGUI.sys.book.size(); i++){
-				if(LibraryGUI.sys.book.get(i).getCategory().equalsIgnoreCase(LibraryGUI.textField_19.getText())){
-					LibraryGUI.titleList.addElement(LibraryGUI.sys.book.get(i).getTitle());
-					a = true;
-				}
-			}
-			if(a == false){
-				JOptionPane.showMessageDialog(null, "Category Not Available");
-				return;
-			}
 			LibraryGUI.titleList.removeAllElements();
 			ArrayList<String> lst = LibraryGUI.sys.booksByCategory(LibraryGUI.textField_19.getText());
 			for(int i = 0; i < lst.size(); i++){
 				LibraryGUI.titleList.addElement(lst.get(i));
 			}
+			JOptionPane.showMessageDialog(null, "Search Completed");
 		}
 
 		if(e.getActionCommand().equals("Pay Fine")){
@@ -408,6 +390,53 @@ public class ButtonResponse implements ActionListener{
 				LibraryGUI.bestBooks.addElement(temp);
 			}
 		}
+		
+		if(e.getActionCommand().equals("Search By Name")){
+			if(LibraryGUI.textField_3.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "Missing Fields");
+				return;
+			}
+			LibraryGUI.titleList.removeAllElements();
+			ArrayList <String> lst = LibraryGUI.sys.booksByTitle(LibraryGUI.textField_3.getText());
+			for(int i = 0; i < lst.size(); i++){
+				LibraryGUI.titleList.addElement(lst.get(i));
+			}
+			JOptionPane.showMessageDialog(null, "Search Completed");
+		}
+		
+		if(e.getActionCommand().equals("Search By Number")){
+			if(LibraryGUI.textField_8.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "Missing Fields");
+				return;
+			}
+			temp = LibraryGUI.textField_8.getText();
+			stuNum = Integer.valueOf(temp);
+			if(temp.equals("")){
+				JOptionPane.showMessageDialog(null, "Missing Fields");
+				return;
+			}
+			if(!LibraryGUI.sys.userExists(stuNum)){
+				JOptionPane.showMessageDialog(null, "User Does not Exist");
+				return;
+			}
+			LibraryGUI.searchedUser.removeAllElements();
+			String user = LibraryGUI.sys.searchUser(stuNum);
+			LibraryGUI.searchedUser.addElement(user);
+			JOptionPane.showMessageDialog(null, "Search Completed");
+		}
+		
+		if(e.getActionCommand().equals("Search By Student Name")){
+			if(LibraryGUI.textField_20.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "Missing Fields");
+				return;
+			}
+			LibraryGUI.searchedUser.removeAllElements();
+			ArrayList<String> lst = LibraryGUI.sys.searchUserName(LibraryGUI.textField_20.getText());
+			for(int i = 0; i < lst.size(); i++)
+				LibraryGUI.searchedUser.addElement(lst.get(i));
+			
+			JOptionPane.showMessageDialog(null, "Search Completed");
+		}
 
 		if(e.getActionCommand().equals("Compare By Category")){
 			if(LibraryGUI.textField_25.getText().equals("")){
@@ -436,9 +465,7 @@ public class ButtonResponse implements ActionListener{
 		return 0;
 	}
 
-	public Hashtable<String, String> login(JFrame frame) {
-		Hashtable<String, String> logininformation = new Hashtable<String, String>();
-
+	public void login(JFrame frame) {
 		JPanel panel = new JPanel(new BorderLayout(5, 5));
 
 		JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
@@ -459,10 +486,6 @@ public class ButtonResponse implements ActionListener{
 		}
 
 		JOptionPane.showMessageDialog(frame, panel, "Login, Attempt: " + LibraryGUI.attempts + "/5", JOptionPane.QUESTION_MESSAGE);
-
-		logininformation.put("user", username.getText());
-		logininformation.put("pass", new String(password.getPassword()));
-		return logininformation;
 	}
 
 	public boolean inputCorrect(String user, char [] pass){
