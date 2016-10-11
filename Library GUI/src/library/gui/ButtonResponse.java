@@ -488,7 +488,7 @@ public class ButtonResponse implements ActionListener{
 		JOptionPane.showMessageDialog(frame, panel, "Login, Attempt: " + LibraryGUI.attempts + "/5", JOptionPane.QUESTION_MESSAGE);
 	}
 
-	public boolean inputCorrect(String user, char [] pass){
+	public boolean loginCorrect(String user, char [] pass){
 		String passString = new String(pass);
 		if(!user.equals("admin") || !passString.equals("admin")){
 			return false;
@@ -498,7 +498,7 @@ public class ButtonResponse implements ActionListener{
 
 	public void login(){
 		login(LibraryGUI.frame);
-		if(!(inputCorrect(username.getText(), password.getPassword()))){
+		if(!(loginCorrect(username.getText(), password.getPassword()))){
 			//JOptionPane.showMessageDialog(null, "Username/Password is Incorrect");
 			LibraryGUI.attempts++;
 		}
