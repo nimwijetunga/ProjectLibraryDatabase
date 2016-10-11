@@ -38,7 +38,13 @@ public class ButtonResponse implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Missing Fields");
 				return;
 			}
+
+			temp = LibraryGUI.textField.getText();
 			
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			
 			while(LibraryGUI.credVerified == false && LibraryGUI.attempts <= 5){
 				login();
@@ -47,9 +53,9 @@ public class ButtonResponse implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Access Denied, Restart System");
 				return;
 			}
-
-			temp = LibraryGUI.textField.getText();
+			
 			stuNum = Integer.valueOf(temp);
+			
 			if(!LibraryGUI.sys.userExists(stuNum)){
 				LibraryGUI.sys.createUser(stuNum, LibraryGUI.textField_1.getText(), LibraryGUI.textField_2.getText());
 				LibraryGUI.studentList.addElement(LibraryGUI.textField_1.getText() + " " + LibraryGUI.textField_2.getText() + ", " + Integer.toString(stuNum)
@@ -67,6 +73,15 @@ public class ButtonResponse implements ActionListener{
 				return;
 			}
 
+
+			rating = getSelectedButton();
+			temp = LibraryGUI.textField_9.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
+			cost = Double.valueOf(temp);
+			
 			while(LibraryGUI.credVerified == false && LibraryGUI.attempts <= 5){
 				login();
 			}
@@ -74,11 +89,7 @@ public class ButtonResponse implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Access Denied, Restart System");
 				return;
 			}
-
-
-			rating = getSelectedButton();
-			temp = LibraryGUI.textField_9.getText();
-			cost = Double.valueOf(temp);
+			
 			if(getSelectedButton() == 0){
 				JOptionPane.showMessageDialog(null, "Enter a Rating");
 				return;
@@ -101,6 +112,11 @@ public class ButtonResponse implements ActionListener{
 				return;
 			}
 
+			temp = LibraryGUI.textField_10.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			while(LibraryGUI.credVerified == false && LibraryGUI.attempts <= 5){
 				login();
 			}
@@ -108,9 +124,8 @@ public class ButtonResponse implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Access Denied, Restart System");
 				return;
 			}
-
-			temp = LibraryGUI.textField_10.getText();
 			stuNum = Integer.valueOf(temp);
+
 			if(!LibraryGUI.sys.userExists(stuNum)){
 				JOptionPane.showMessageDialog(null, "User Does Not Exist");
 			}else{
@@ -168,6 +183,10 @@ public class ButtonResponse implements ActionListener{
 				return;
 			}
 			temp = LibraryGUI.textField_12.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			stuNum = Integer.parseInt(temp);
 			iden = LibraryGUI.textField_13.getText();
 			dateC = LibraryGUI.textField_14.getText();
@@ -217,6 +236,10 @@ public class ButtonResponse implements ActionListener{
 				return;
 			}
 			temp = LibraryGUI.textField_15.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			stuNum = Integer.parseInt(temp);
 			iden = LibraryGUI.textField_17.getText();
 			dateR = LibraryGUI.textField_16.getText();
@@ -262,6 +285,10 @@ public class ButtonResponse implements ActionListener{
 				return;
 			}
 			temp = LibraryGUI.textField_15.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			stuNum = Integer.parseInt(temp);
 			iden = LibraryGUI.textField_17.getText();
 			if(!LibraryGUI.sys.bookExists(iden) || !LibraryGUI.sys.userExists(stuNum)){
@@ -322,6 +349,10 @@ public class ButtonResponse implements ActionListener{
 			}
 
 			temp = LibraryGUI.textField_10.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			stuNum = Integer.valueOf(temp);
 
 			if(!LibraryGUI.sys.userExists(stuNum)){
@@ -349,6 +380,10 @@ public class ButtonResponse implements ActionListener{
 			}
 			LibraryGUI.userBookList.removeAllElements();
 			temp = LibraryGUI.textField_21.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			stuNum = Integer.valueOf(temp);
 			if(!LibraryGUI.sys.userExists(stuNum)){
 				JOptionPane.showMessageDialog(null, "User Does Not Exist");
@@ -383,6 +418,10 @@ public class ButtonResponse implements ActionListener{
 			}
 			LibraryGUI.bestBooks.removeAllElements();
 			temp = LibraryGUI.sys.compareByAuthor(LibraryGUI.textField_24.getText());
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			if(temp.equals(" ")){
 				JOptionPane.showMessageDialog(null, "Author Does Not Exist");
 				return;
@@ -410,6 +449,10 @@ public class ButtonResponse implements ActionListener{
 				return;
 			}
 			temp = LibraryGUI.textField_8.getText();
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			stuNum = Integer.valueOf(temp);
 			if(temp.equals("")){
 				JOptionPane.showMessageDialog(null, "Missing Fields");
@@ -445,6 +488,10 @@ public class ButtonResponse implements ActionListener{
 			}
 			LibraryGUI.bestBooks.removeAllElements();
 			temp = LibraryGUI.sys.compareByCategory(LibraryGUI.textField_25.getText());
+			if(!inputCorrect(temp)){
+				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
+				return;
+			}
 			if(temp.equals(" ")){
 				JOptionPane.showMessageDialog(null, "Cateogry Does Not Exist");
 				return;
@@ -538,6 +585,25 @@ public class ButtonResponse implements ActionListener{
 					+ ", " + LibraryGUI.sys.book.get(i).getISBN() + ", " + LibraryGUI.sys.book.get(i).getCategory()
 					+ ", " + LibraryGUI.sys.book.get(i).getBookRating() + ", " + LibraryGUI.formatter.format(a));
 		}
+	}
+	
+	public boolean inputCorrect(String input){
+		char [] ch = {'0','1','2','3','4','5','6','7','8','9'};
+		boolean b = false;
+		for(int i = 0; i < input.length(); i++){
+			b = false;
+			for(int j = 0; j < ch.length; j++){
+				if(input.charAt(i) == ch[j]){
+					b = true;
+					return true;
+				}else{
+					b = false;
+				}
+			}
+		}
+		if(!b)
+			return false;
+		return false;
 	}
 }
 
