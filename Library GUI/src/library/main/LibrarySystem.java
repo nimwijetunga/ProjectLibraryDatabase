@@ -309,7 +309,7 @@ public class LibrarySystem{
 		for(int i = 0; i < user.size(); i++){
 			if(user.get(i).getStudentNumber() == stuNum){
 				for(int j = 0; j < user.get(i).userISBN.size(); j++){
-					if(user.get(i).userISBN.get(j).equalsIgnoreCase(iden)){
+					if(user.get(i).userISBN.get(j).equals(iden)){
 						return true;
 					}
 				}

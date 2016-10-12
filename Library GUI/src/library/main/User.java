@@ -99,8 +99,6 @@ public class User{
 		numOfBooks--;
 	}
 	
-	//Nim, Umar, Mohammed
-	
 	/*canCheckoutBook to determine if a user has a fines balnce of over $5
 	 * @return returns false if the fines balance is over $5 true otherwise
 	 */
