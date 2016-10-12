@@ -101,6 +101,7 @@ public class ButtonResponse implements ActionListener{
 				LibraryGUI.bookList.addElement(LibraryGUI.textField_4.getText() + ", " + LibraryGUI.textField_5.getText() + ", " + LibraryGUI.textField_6.getText()
 				+ ", " + LibraryGUI.textField_7.getText() + ", " + rating + ", " + LibraryGUI.formatter.format(a));
 				JOptionPane.showMessageDialog(null, "Book Added");
+				refreshListCheckout();
 			}else{
 				JOptionPane.showMessageDialog(null, "Book Already Exists");
 			}
