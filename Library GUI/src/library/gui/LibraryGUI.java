@@ -670,8 +670,6 @@ public class LibraryGUI extends JFrame{
 		textField_23.setBounds(116, 94, 86, 20);
 		panel_15.add(textField_23);
 
-		//Nim, Umar, Mohammed
-
 		JButton btnCompar = new JButton("Compare");
 		btnCompar.addActionListener(btn);
 		btnCompar.setBounds(60, 125, 89, 23);
