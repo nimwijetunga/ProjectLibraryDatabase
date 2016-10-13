@@ -46,7 +46,7 @@ public class ButtonResponse implements ActionListener{
 			
 			temp = LibraryGUI.textField.getText();
 			
-			//Checks to see if user entered an int values only
+			//Checks to see if user entered numerical values only
 			if(!inputCorrect(temp)){
 				JOptionPane.showMessageDialog(null, "Input Type Incorrect");
 				return;
