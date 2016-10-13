@@ -266,7 +266,7 @@ public class LibrarySystem{
 	public ArrayList<String> booksByAuthor(String auth){
 		ArrayList <String> booksAuthor = new ArrayList<String>();
 		for(int i = 0; i < book.size(); i++){
-			if(book.get(i).getAuthor().equalsIgnoreCase(auth)){
+			if(book.get(i).getAuthor().toLowerCase().indexOf(auth.toLowerCase()) != -1){
 				booksAuthor.add(book.get(i).getTitle() + ", " + book.get(i).getISBN());
 			}
 		}

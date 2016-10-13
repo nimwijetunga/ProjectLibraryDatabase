@@ -260,7 +260,7 @@ public class LibraryGUI extends JFrame{
 		panel.setLayout(null);
 
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(-4, 4, 944, 307);
+		lblNewLabel_2.setBounds(-4, 4, 949, 303);
 		panel.add(lblNewLabel_2);
 		lblNewLabel_2.setIcon(new ImageIcon(LibraryGUI.class.getResource("/library/res/Book.png")));
 
@@ -331,7 +331,6 @@ public class LibraryGUI extends JFrame{
 		panel_3.add(btnAddBook);
 
 		JRadioButton radioButton = new JRadioButton("1");
-		radioButton.setBackground(Color.LIGHT_GRAY);
 		group.add(radioButton);
 		radioButton.setBounds(6, 204, 36, 23);
 		panel_3.add(radioButton);
@@ -749,7 +748,7 @@ public class LibraryGUI extends JFrame{
 		panel_16.add(list_5);
 
 		JLabel border = new JLabel("New label");
-		border.setBounds(0, -21, 1017, 382);
+		border.setBounds(10, -21, 1017, 382);
 		contentPane.add(border);
 		border.setIcon(new ImageIcon(LibraryGUI.class.getResource("/library/res/Border.png")));
 
