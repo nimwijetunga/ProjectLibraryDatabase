@@ -68,6 +68,7 @@ public class LibrarySystem{
 		ArrayList <String> names = new ArrayList<String>();
 		String temp = "";
 		for(int i = 0; i < user.size(); i++){
+			//Uses index of to see if the users first or last name contains at least part of the input name
 			temp = user.get(i).getFirstName() + user.get(i).getLastName();
 			if(user.get(i).getFirstName().toLowerCase().indexOf(name.toLowerCase()) != -1){
 				names.add(user.get(i).getStudentNumber() + ", " + user.get(i).getFirstName() + " " + user.get(i).getLastName() + ", " + formatter.format(user.get(i).getFinesBalance()));
@@ -280,6 +281,7 @@ public class LibrarySystem{
 		title = title.toLowerCase();
 		ArrayList <String> bookTitle = new ArrayList<String>();
 		for(int i = 0; i < book.size(); i++){
+			//Index of to see if the books title contains at least part of the input string
 			if(book.get(i).getTitle().toLowerCase().indexOf(title.toLowerCase()) != -1){
 				bookTitle.add(book.get(i).getTitle() + ", " + book.get(i).getISBN());
 			}
@@ -322,7 +324,7 @@ public class LibrarySystem{
 	 * @param stuNum = student number
 	 * @return returns an array list with all the users books
 	 */
-	public ArrayList<String> booksuserHas(int stuNum){
+	public ArrayList<String> booksUserHas(int stuNum){
 		ArrayList<String> lst = new ArrayList<String>();
 		for(int i = 0; i < user.size(); i++){
 			if(user.get(i).getStudentNumber() == stuNum){
