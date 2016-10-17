@@ -11,12 +11,7 @@ import java.awt.Color;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Locale;
 
@@ -26,7 +21,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
@@ -35,8 +29,6 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
-
-import com.sun.xml.internal.fastinfoset.sax.Properties;
 
 import library.main.LibrarySystem;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
