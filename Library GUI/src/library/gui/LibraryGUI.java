@@ -11,7 +11,12 @@ import java.awt.Color;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Locale;
 
@@ -21,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
@@ -30,7 +36,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 
+import com.sun.xml.internal.fastinfoset.sax.Properties;
+
 import library.main.LibrarySystem;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
@@ -69,9 +81,18 @@ public class LibraryGUI extends JFrame {
 
         // Creating an instance of the ButtonResponse class
         private ButtonResponse btn = new ButtonResponse();
+        
 
         // font for the entire UI
         private Font font = new Font("Yu Gothic UI Light", Font.PLAIN, 12);
+        
+        static public UtilDateModel model;
+        static public JDatePanelImpl datePanel;
+        static public JDatePickerImpl datePicker;
+        
+        static public UtilDateModel model2;
+        static public JDatePanelImpl datePanel2;
+        static public JDatePickerImpl datePicker2;
 
         /*
          * creating text fields for user inputs Value of these text fields are read
@@ -89,9 +110,7 @@ public class LibraryGUI extends JFrame {
         public static JTextField textField_11;
         public static JTextField textField_12;
         public static JTextField textField_13;
-        public static JTextField textField_14;
         public static JTextField textField_15;
-        public static JTextField textField_16;
         public static JTextField textField_17;
         public static JTextField textField_18;
         public static JTextField textField_19;
@@ -103,6 +122,12 @@ public class LibraryGUI extends JFrame {
         public static JTextField textField_3;
         public static JTextField textField_8;
         public static JTextField textField_20;
+        
+        public static String checkoutDate;
+        
+        
+        static final String OLD_FORMAT = "MMM dd, yyyy";
+        final static String NEW_FORMAT = "dd/MM/yyyy";
 
         /**
          * Main Method Launch the application.
@@ -155,6 +180,11 @@ public class LibraryGUI extends JFrame {
          * frame
          */
         public LibraryGUI() {
+        	model = new UtilDateModel();  
+            datePanel = new JDatePanelImpl(model);  
+            datePicker = new JDatePickerImpl(datePanel);
+            model2 = new UtilDateModel();  
+            datePanel2 = new JDatePanelImpl(model);  
         	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	setBounds(100, 100, 1000, 400);
         	contentPane = new JPanel();
@@ -407,6 +437,9 @@ public class LibraryGUI extends JFrame {
         	JPanel panel_7 = new JPanel();
         	tabbedPane.addTab("Checkout/Return Book", null, panel_7, null);
         	panel_7.setLayout(null);
+        	
+        	panel_7.add(datePicker);
+        	datePicker.setBounds(138, 128, 133, 25);
 
         	JList<String> list_1 = new JList<String>(booksAvailable);
         	list_1.setBorder(new TitledBorder(null, " ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -427,11 +460,7 @@ public class LibraryGUI extends JFrame {
         	btnCheckoutBook.addActionListener(btn);
         	btnCheckoutBook.setBounds(80, 226, 145, 36);
         	panel_7.add(btnCheckoutBook);
-
-        	textField_14 = new JTextField();
-        	textField_14.setColumns(10);
-        	textField_14.setBounds(155, 131, 86, 18);
-        	panel_7.add(textField_14);
+    
 
         	JLabel lblNewLabel_3 = new JLabel("New label");
         	lblNewLabel_3
@@ -459,16 +488,18 @@ public class LibraryGUI extends JFrame {
         	panel_8.setBounds(608, 0, 337, 309);
         	panel_7.add(panel_8);
         	panel_8.setLayout(null);
+        	datePicker2 = new JDatePickerImpl(datePanel);
+        	
+        	panel_8.add(datePicker2);
+        	datePicker2.setBounds(147, 146, 128, 25);
 
         	textField_15 = new JTextField();
         	textField_15.setColumns(10);
         	textField_15.setBounds(147, 94, 85, 18);
         	panel_8.add(textField_15);
-
-        	textField_16 = new JTextField();
-        	textField_16.setColumns(10);
-        	textField_16.setBounds(147, 145, 85, 18);
-        	panel_8.add(textField_16);
+        	
+        	//panel_8.add(datePicker2);
+        	//datePicker.setBounds(147, 145, 85, 18);
 
         	textField_17 = new JTextField();
         	textField_17.setColumns(10);
@@ -484,7 +515,7 @@ public class LibraryGUI extends JFrame {
         	btnLostBook.addActionListener(btn);
         	btnLostBook.setBounds(179, 250, 113, 34);
         	panel_8.add(btnLostBook);
-
+        	
         	JLabel lblNewLabel_10 = new JLabel("New label");
         	lblNewLabel_10
         	.setIcon(new ImageIcon(LibraryGUI.class.getResource("/library/res/Checkout and Return Books 2.png")));
@@ -691,7 +722,7 @@ public class LibraryGUI extends JFrame {
         	JLabel lblNewLabel_12 = new JLabel("New label");
         	lblNewLabel_12.setIcon(new ImageIcon(LibraryGUI.class.getResource("/library/res/Best Book3.png")));
         	lblNewLabel_12.setBounds(-513, 0, 945, 309);
-                panel_16.add(lblNewLabel_12);
+               panel_16.add(lblNewLabel_12);
         }
 
         /*

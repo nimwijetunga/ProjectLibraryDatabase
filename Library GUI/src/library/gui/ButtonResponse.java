@@ -1,15 +1,16 @@
 package library.gui;
 
 import java.awt.BorderLayout;
-
-
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Locale;
 
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
@@ -19,6 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 
 public class ButtonResponse implements ActionListener{
 	
@@ -199,7 +203,7 @@ public class ButtonResponse implements ActionListener{
 		
 		//If the user wants to checkout a book
 		if(e.getActionCommand().equals("Checkout Book")){
-			if(LibraryGUI.textField_12.getText().equals("") || LibraryGUI.textField_13.getText().equals("") || LibraryGUI.textField_14.getText().equals("")){
+			if(LibraryGUI.textField_12.getText().equals("") || LibraryGUI.textField_13.getText().equals("")){
 				JOptionPane.showMessageDialog(null, "Missing Fields");
 				return;
 			}
@@ -210,7 +214,7 @@ public class ButtonResponse implements ActionListener{
 			}
 			stuNum = Integer.parseInt(temp);
 			iden = LibraryGUI.textField_13.getText();
-			dateC = LibraryGUI.textField_14.getText();
+			dateC = formatDate(LibraryGUI.datePicker);
 			
 			//checks to see if the user exists
 			if(!LibraryGUI.sys.userExists(stuNum)){
@@ -260,7 +264,7 @@ public class ButtonResponse implements ActionListener{
 		
 		//If the user wants to return a book
 		if(e.getActionCommand().equals("Return Book")){
-			if(LibraryGUI.textField_15.getText().equals("") || LibraryGUI.textField_16.getText().equals("") || LibraryGUI.textField_17.getText().equals("")){
+			if(LibraryGUI.textField_15.getText().equals("") || LibraryGUI.textField_17.getText().equals("")){
 				JOptionPane.showMessageDialog(null, "Missing Fields");
 				return;
 			}
@@ -271,7 +275,7 @@ public class ButtonResponse implements ActionListener{
 			}
 			stuNum = Integer.parseInt(temp);
 			iden = LibraryGUI.textField_17.getText();
-			dateR = LibraryGUI.textField_16.getText();
+			dateR = formatDate(LibraryGUI.datePicker2);
 			
 			//Makes sure book exists
 			if(!LibraryGUI.sys.bookExists(iden)){
@@ -706,6 +710,28 @@ public class ButtonResponse implements ActionListener{
 		if(!b)
 			return false;
 		return false;
+	}
+	
+	public String formatDate(JDatePickerImpl picker){
+		java.util.Date selectedDate = null;
+		String sDate = picker.getModel().getValue().toString();
+		String sDate2 = sDate.substring((sDate.length()-5), (sDate.length()));
+		sDate = sDate.substring(4,10) + ",";
+		String actualDate = sDate + sDate2;
+		DateFormat format = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+		
+	    try {
+			selectedDate = format.parse(actualDate);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+	    
+	    String newDateString;
+	    SimpleDateFormat sdf = new SimpleDateFormat(LibraryGUI.OLD_FORMAT);
+	    sdf.applyPattern(LibraryGUI.NEW_FORMAT);
+	    newDateString = sdf.format(selectedDate);
+	    
+	    return newDateString;
 	}
 }
 
