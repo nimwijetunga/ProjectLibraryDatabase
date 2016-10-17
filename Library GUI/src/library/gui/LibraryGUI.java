@@ -1,14 +1,16 @@
 package library.gui;
 
 /*
- * Add return on search books user has 
+ * BY: NIM, UMAR AND MOHAMMED
+ * CLASS: ICS4U0
+ * DATE: 17/10/2016
+ * INSTRUCTOR: MS.RAHAFROUZ
  */
 
 import java.awt.Color;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.text.NumberFormat;
 import java.util.Enumeration;
 import java.util.Locale;
