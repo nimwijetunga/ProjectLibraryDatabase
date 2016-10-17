@@ -425,6 +425,7 @@ public class ButtonResponse implements ActionListener{
 			//Pays the users fine
 			JOptionPane.showMessageDialog(null, "Fine Paid");
 			LibraryGUI.sys.payFine(stuNum);
+			refreshUserList();
 		}
 		
 		//Searches for the books that a user currently has checked out
