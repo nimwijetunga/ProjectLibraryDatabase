@@ -175,8 +175,10 @@ public class LibraryGUI extends JFrame {
         	model = new UtilDateModel();  
             datePanel = new JDatePanelImpl(model);  
             datePicker = new JDatePickerImpl(datePanel);
+            
             model2 = new UtilDateModel();  
-            datePanel2 = new JDatePanelImpl(model);  
+            datePanel2 = new JDatePanelImpl(model2);  
+            datePicker2 = new JDatePickerImpl(datePanel2);
         	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	setBounds(100, 100, 1000, 400);
         	contentPane = new JPanel();

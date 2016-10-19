@@ -722,8 +722,8 @@ public class ButtonResponse implements ActionListener{
 		
 	    try {
 			selectedDate = format.parse(actualDate);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
+		} catch (ParseException e) {
+			System.err.println("Unable to Parse Information: " + e.getMessage());
 		}
 	    
 	    String newDateString;
